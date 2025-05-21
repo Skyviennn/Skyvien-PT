@@ -4,6 +4,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>REAL SKYVIEN</title>
 <style>
+  /* Animasi Loading Neon */
+  #loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .neon-loader {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0ff;
+    text-shadow:
+      0 0 5px #0ff,
+      0 0 10px #0ff,
+      0 0 20px #0ff,
+      0 0 40px #0ff;
+    animation: flicker 1.5s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
   /* Reset dan dasar */
   body {
     background: #111;
@@ -12,6 +44,7 @@
     margin: 0;
     padding: 20px;
     min-height: 100vh;
+    display: none; /* Sembunyikan dulu sampai loading selesai */
   }
 
   h1, h2 {
@@ -36,7 +69,6 @@
       0 0 40px #0ff;
   }
 
-  /* Neon style untuk list */
   ul {
     list-style-type: none;
     padding-left: 0;
@@ -49,8 +81,7 @@
     background: #001111aa;
     cursor: pointer;
     transition: 0.3s;
-    box-shadow:
-      0 0 5px #0ff;
+    box-shadow: 0 0 5px #0ff;
   }
 
   ul li:hover {
@@ -70,7 +101,6 @@
     text-decoration: underline;
   }
 
-  /* PT PRIBADI toggle */
   .pt-item {
     margin-bottom: 15px;
   }
@@ -84,8 +114,7 @@
     border: 1px solid #0ff;
     border-radius: 8px;
     background: #002222aa;
-    box-shadow:
-      0 0 10px #0ff;
+    box-shadow: 0 0 10px #0ff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -107,7 +136,6 @@
     max-height: 500px;
   }
 
-  /* Icon arrow */
   .arrow {
     transition: transform 0.4s ease;
   }
@@ -115,7 +143,6 @@
     transform: rotate(90deg);
   }
 
-  /* Small info text */
   .info-text {
     color: #0ff7;
     font-size: 0.9em;
@@ -126,6 +153,11 @@
 </head>
 <body>
 
+<!-- Loading Screen -->
+<div id="loader-wrapper">
+  <div class="neon-loader">Loading REAL SKYVIEN...</div>
+</div>
+
 <h1>REAL SKYVIEN</h1>
 
 <!-- NOMOR ASLI SKYVIEN -->
@@ -133,7 +165,6 @@
   <h2>NOMOR ASLI SKYVIEN</h2>
   <p class="info-text">Skyvien Real.</p>
   <ul>
-    <!-- Edit di sini untuk tambah/ubah nomor -->
     <li><a href="https://wa.me/6282260591031" target="_blank">+62-822-6059-1031</a></li>
   </ul>
 </section>
@@ -141,60 +172,58 @@
 <!-- PT PRIBADI -->
 <section id="pt-pribadi">
   <h2>PT PRIBADI</h2>
-  
-  <!-- Edit di sini untuk tambah PT pribadi -->
+
   <div class="pt-item">
     <div class="pt-header" onclick="togglePTContent(this)">
-      FOUR STORE
-      <span class="arrow">&#9654;</span>
+      FOUR STORE <span class="arrow">&#9654;</span>
     </div>
     <div class="pt-content">
-      <p>Nomor: <a href="https://wa.me/" target="_blank">CONTOH NOMOR</a></p>
+      <p>Nomor: <a href="https://wa.me/6281234567890" target="_blank">+62-812-3456-7890</a></p>
       <p>List Jualan:</p>
       <ul>
-        <li><a href="https://wa.me/628111222333?text=Order%20Produk%20A" target="_blank">ORDER DISINI</a></li>
+        <li><a href="https://wa.me/6281234567890?text=Order%20Produk%20A" target="_blank">ORDER PRODUK A</a></li>
       </ul>
     </div>
   </div>
 
   <div class="pt-item">
     <div class="pt-header" onclick="togglePTContent(this)">
-      DYTZ
-      <span class="arrow">&#9654;</span>
+      DYTZ <span class="arrow">&#9654;</span>
     </div>
     <div class="pt-content">
-      <p>Nomor: <a href="https://wa.me/" target="_blank">CONTOH NOMOR</a></p>
+      <p>Nomor: <a href="https://wa.me/6289876543210" target="_blank">+62-898-7654-3210</a></p>
       <p>List Jualan:</p>
       <ul>
-        <li><a href="https://wa.me/628999888777?text=Order%20Produk%20Y" target="_blank">ORDER DISINI</a></li>
+        <li><a href="https://wa.me/6289876543210?text=Order%20Produk%20Y" target="_blank">ORDER PRODUK Y</a></li>
       </ul>
     </div>
   </div>
 
-  <p class="info-text">Mau Join Pt? Chat Nomor Skyvien Diatas</p>
+  <p class="info-text">Mau Join PT? Chat nomor Skyvien di atas</p>
 </section>
 
 <!-- CLONE -->
 <section id="clone">
   <h2>CLONE</h2>
   <p style="text-align:center; font-weight:bold; color:#f00; text-shadow: 0 0 10px #f00;">
-    SELAIN NOMOR DIATAS ADALAH CLONE JANGAN TRX
+    SELAIN NOMOR DIATAS ADALAH CLONE, JANGAN TRX!
   </p>
 </section>
 
 <script>
-  // Toggle konten PT pribadi
+  // Toggle PT content
   function togglePTContent(headerEl) {
     const content = headerEl.nextElementSibling;
     const arrow = headerEl.querySelector('.arrow');
-    if(content.classList.contains('open')) {
-      content.classList.remove('open');
-      arrow.classList.remove('open');
-    } else {
-      content.classList.add('open');
-      arrow.classList.add('open');
-    }
+    content.classList.toggle('open');
+    arrow.classList.toggle('open');
   }
+
+  // Loading animasi selesai
+  window.addEventListener('load', () => {
+    document.getElementById('loader-wrapper').style.display = 'none';
+    document.body.style.display = 'block';
+  });
 </script>
 
 </body>
