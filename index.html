@@ -1,161 +1,191 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>REAL SKYVIEN</title>
-<style>
-  /* Animasi Loading Neon */
-  #loader-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REAL SKYVIEN</title>
+  <style>
+    /* Animasi Loading */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .pulse-ring {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .pulse-ring::before, .pulse-ring::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 4px solid #0ff;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    .pulse-ring::after {
+      animation-delay: 0.75s;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
 
-  .neon-loader {
-    font-size: 2em;
-    font-weight: bold;
-    color: #0ff;
-    text-shadow:
-      0 0 5px #0ff,
-      0 0 10px #0ff,
-      0 0 20px #0ff,
-      0 0 40px #0ff;
-    animation: flicker 1.5s infinite alternate;
-  }
+    body {
+      background: #111;
+      color: #0ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
 
-  @keyframes flicker {
-    0%   { opacity: 1; }
-    50%  { opacity: 0.4; }
-    100% { opacity: 1; }
-  }
+    h1, h2 {
+      text-align: center;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+    }
 
-  /* Reset dan dasar */
-  body {
-    background: #111;
-    color: #0ff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-    display: none; /* Sembunyikan dulu sampai loading selesai */
-  }
+    section {
+      background: #000a;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+      padding: 20px;
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+    }
 
-  h1, h2 {
-    text-align: center;
-    color: #0ff;
-    text-shadow:
-      0 0 5px #0ff,
-      0 0 10px #0ff,
-      0 0 20px #0ff;
-  }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
 
-  section {
-    background: #000a;
-    border: 2px solid #0ff;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 600px;
-    padding: 20px;
-    box-shadow:
-      0 0 10px #0ff,
-      0 0 20px #0ff,
-      0 0 40px #0ff;
-  }
+    ul li {
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      background: #001111aa;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 5px #0ff;
+    }
 
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
+    ul li:hover {
+      background: #0ff1;
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    }
 
-  ul li {
-    padding: 8px;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    background: #001111aa;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 5px #0ff;
-  }
+    a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-  ul li:hover {
-    background: #0ff1;
-    box-shadow:
-      0 0 10px #0ff,
-      0 0 20px #0ff;
-  }
+    a:hover {
+      text-decoration: underline;
+    }
 
-  a {
-    color: #0ff;
-    text-decoration: none;
-    font-weight: bold;
-  }
+    .pt-item {
+      margin-bottom: 15px;
+    }
 
-  a:hover {
-    text-decoration: underline;
-  }
+    .pt-header {
+      font-size: 1.2em;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px;
+      border: 1px solid #0ff;
+      border-radius: 8px;
+      background: #002222aa;
+      box-shadow: 0 0 10px #0ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  .pt-item {
-    margin-bottom: 15px;
-  }
+    .pt-header:hover {
+      background: #0ff3;
+    }
 
-  .pt-header {
-    font-size: 1.2em;
-    font-weight: 700;
-    cursor: pointer;
-    user-select: none;
-    padding: 8px;
-    border: 1px solid #0ff;
-    border-radius: 8px;
-    background: #002222aa;
-    box-shadow: 0 0 10px #0ff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .pt-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      margin-top: 8px;
+      padding-left: 15px;
+    }
 
-  .pt-header:hover {
-    background: #0ff3;
-  }
+    .pt-content.open {
+      max-height: 500px;
+    }
 
-  .pt-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    margin-top: 8px;
-    padding-left: 15px;
-  }
+    .arrow {
+      transition: transform 0.4s ease;
+    }
 
-  .pt-content.open {
-    max-height: 500px;
-  }
+    .arrow.open {
+      transform: rotate(90deg);
+    }
 
-  .arrow {
-    transition: transform 0.4s ease;
-  }
-  .arrow.open {
-    transform: rotate(90deg);
-  }
+    .info-text {
+      color: #0ff7;
+      font-size: 0.9em;
+      text-align: center;
+      margin-top: 10px;
+    }
 
-  .info-text {
-    color: #0ff7;
-    font-size: 0.9em;
-    text-align: center;
-    margin-top: 10px;
-  }
-</style>
+    /* Centang Biru Verifikasi */
+    .verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verified-icon {
+      width: 16px;
+      height: 16px;
+      background-color: #0ff;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      box-shadow: 0 0 6px #0ff, 0 0 12px #0ff;
+    }
+
+    .verified-icon::after {
+      content: '✔';
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+    }
+
+    /* Clone Warning */
+    .warning {
+      text-align: center;
+      font-weight: bold;
+      color: #f00;
+      text-shadow: 0 0 10px #f00;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Loading Screen -->
-<div id="loader-wrapper">
-  <div class="neon-loader">Loading REAL SKYVIEN...</div>
+<!-- Loader -->
+<div id="loader">
+  <div class="pulse-ring"></div>
 </div>
 
 <h1>REAL SKYVIEN</h1>
@@ -163,9 +193,14 @@
 <!-- NOMOR ASLI SKYVIEN -->
 <section id="nomor-asli">
   <h2>NOMOR ASLI SKYVIEN</h2>
-  <p class="info-text">Skyvien Real.</p>
+  <p class="info-text">Nomor Resmi & Terverifikasi</p>
   <ul>
-    <li><a href="https://wa.me/6282260591031" target="_blank">+62-822-6059-1031</a></li>
+    <li>
+      <span class="verified">
+        <a href="https://wa.me/6282260591031" target="_blank">+62 822-6059-1031</a>
+        <span class="verified-icon"></span>
+      </span>
+    </li>
   </ul>
 </section>
 
@@ -173,57 +208,44 @@
 <section id="pt-pribadi">
   <h2>PT PRIBADI</h2>
 
+  <!-- Tambah PT pribadi di sini -->
   <div class="pt-item">
     <div class="pt-header" onclick="togglePTContent(this)">
-      FOUR STORE <span class="arrow">&#9654;</span>
+      FOUR STORE
+      <span class="arrow">&#9654;</span>
     </div>
     <div class="pt-content">
-      <p>Nomor: <a href="https://wa.me/6281234567890" target="_blank">+62-812-3456-7890</a></p>
+      <p>Nomor: <a href="https://wa.me/6285155599900" target="_blank">+62 851-5559-9900</a></p>
       <p>List Jualan:</p>
       <ul>
-        <li><a href="https://wa.me/6281234567890?text=Order%20Produk%20A" target="_blank">ORDER PRODUK A</a></li>
+        <li><a href="https://wa.me/6285155599900?text=Order%20Panel%201GB" target="_blank">Panel 1GB - Rp5.000</a></li>
+        <li><a href="https://wa.me/6285155599900?text=Order%20Bot%20Premium" target="_blank">Bot Premium - Rp15.000</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="pt-item">
-    <div class="pt-header" onclick="togglePTContent(this)">
-      DYTZ <span class="arrow">&#9654;</span>
-    </div>
-    <div class="pt-content">
-      <p>Nomor: <a href="https://wa.me/6289876543210" target="_blank">+62-898-7654-3210</a></p>
-      <p>List Jualan:</p>
-      <ul>
-        <li><a href="https://wa.me/6289876543210?text=Order%20Produk%20Y" target="_blank">ORDER PRODUK Y</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <p class="info-text">Mau Join PT? Chat nomor Skyvien di atas</p>
+  <p class="info-text">Mau Join PT? Chat Nomor Skyvien Diatas</p>
 </section>
 
 <!-- CLONE -->
 <section id="clone">
   <h2>CLONE</h2>
-  <p style="text-align:center; font-weight:bold; color:#f00; text-shadow: 0 0 10px #f00;">
-    SELAIN NOMOR DIATAS ADALAH CLONE, JANGAN TRX!
-  </p>
+  <p class="warning">SELAIN NOMOR DIATAS ADALAH CLONE - JANGAN TRX</p>
 </section>
 
 <script>
-  // Toggle PT content
+  // Loading screen
+  window.addEventListener("load", function() {
+    document.getElementById("loader").style.display = "none";
+  });
+
+  // Toggle PT pribadi
   function togglePTContent(headerEl) {
     const content = headerEl.nextElementSibling;
     const arrow = headerEl.querySelector('.arrow');
-    content.classList.toggle('open');
-    arrow.classList.toggle('open');
+    content.classList.toggle("open");
+    arrow.classList.toggle("open");
   }
-
-  // Loading animasi selesai
-  window.addEventListener('load', () => {
-    document.getElementById('loader-wrapper').style.display = 'none';
-    document.body.style.display = 'block';
-  });
 </script>
 
 </body>
